@@ -2,7 +2,7 @@ import "./App.css";
 import { Table } from "./components";
 
 function App() {
-  const mockRows = [
+  const mockData = [
     {
       name: "name1",
       value: "value1",
@@ -16,7 +16,7 @@ function App() {
     <div className='App'>
       <h1>JSON Table</h1>
       <div className='container'>
-        <Table rows={mockRows} />
+        <Table data={mockData} />
       </div>
     </div>
   );

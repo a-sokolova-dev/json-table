@@ -1,4 +1,9 @@
-export const TableHead: React.FC = () => {
+import { TableHeadProps } from "./TableHead.types";
+
+export const TableHead: React.FC<TableHeadProps> = (props) => {
+  const { onRowAdd } = props;
+  const handleAddRow = () => onRowAdd && onRowAdd();
+  
   return (
     <thead>
       <tr className='tr'>
@@ -7,7 +12,7 @@ export const TableHead: React.FC = () => {
           Values
         </th>
         <th className='thead-cell thead-cell-icon thead-cell-height thead-background'>
-          Add
+          <button onClick={handleAddRow}>Add</button>
         </th>
       </tr>
     </thead>
