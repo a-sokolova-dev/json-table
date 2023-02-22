@@ -18,14 +18,14 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
     onRowsUpdated && onRowsUpdated([...rows, newRow]);
   };
 
-  const handleDeleteRow = (index: number) => {
-    const updatedRows = rows.filter((_, i) => i !== index);
+  const handleDeleteRow = (id: string) => {
+    const updatedRows = rows.filter((r) => r.id !== id);
     setRows(updatedRows);
     onRowsUpdated && onRowsUpdated(updatedRows);
   };
 
-  const handleChangeRow = (row: TableRowSchema, index: number) => {
-    const updatedRows = [...rows.map((r, i) => (i === index ? row : r))];
+  const handleChangeRow = (row: TableRowSchema) => {
+    const updatedRows = [...rows.map((r) => (r.id === row.id ? row : r))];
     setRows(updatedRows);
     onRowsUpdated && onRowsUpdated(updatedRows);
   };
@@ -38,12 +38,12 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
     <table className='table'>
       <TableHead onRowAdd={handleAddRow} />
       <tbody>
-        {rows.map((r, index) => (
+        {rows.map((r) => (
           <TableRow
             key={`${r.name}-${r.id}`}
             record={r}
-            onRowRecordChange={(row) => handleChangeRow(row, index)}
-            onRowDelete={() => handleDeleteRow(index)}
+            onRowRecordChange={(row) => handleChangeRow(row)}
+            onRowDelete={() => handleDeleteRow(r.id)}
           />
         ))}
       </tbody>
