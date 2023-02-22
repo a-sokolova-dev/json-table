@@ -6,9 +6,5 @@ export interface TableProps {
     data: TableRowSchema[];
     loading?: boolean;
 
-    // empty?: JSXELement
-    // loadingElement?: JSXElement
-
-    // onRowOrderChange?: (e: OrderChangeEvent) => void
     onRowsUpdated?: (rowData: TableRowSchema[]) => void
 }
