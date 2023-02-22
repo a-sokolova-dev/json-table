@@ -1,8 +1,9 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Table } from "./components";
 import { TableRowSchema } from "./components/TableRow/TableRow.types";
+import useDebounce from "./hooks/useDebounce";
 import { parseDataFromString } from "./utils/parseJson";
 
 const initialData = [
@@ -20,19 +21,26 @@ const initialData = [
 
 function App() {
   const [data, setData] = useState<TableRowSchema[]>(initialData);
-  const [textAreaData, setTextAreaData] = useState<string>(
+  const [textareaValue, setTextareaValue] = useState<string>(
     JSON.stringify(initialData, ["name", "value"])
   );
+
+  const debouncedTextareaValue = useDebounce<string>(textareaValue, 500);
 
   const handleDataUpdate = (values: TableRowSchema[]) => {
     setData(values);
   };
 
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const text = e.target.value;
-    setTextAreaData(text);
+    setTextareaValue(e.target.value);
+  };
 
-    const data = parseDataFromString(text);
+  const handleTableSave = () => {
+    setTextareaValue(JSON.stringify(data, ["name", "value"]));
+  };
+
+  useEffect(() => {
+    const data = parseDataFromString(debouncedTextareaValue);
     if (!data) return;
 
     const tableRecords = data.map((item) => ({
@@ -41,11 +49,7 @@ function App() {
     }));
 
     handleDataUpdate(tableRecords);
-  };
-
-  const handleTableSave = () => {
-    setTextAreaData(JSON.stringify(data, ["name", "value"]));
-  };
+  }, [debouncedTextareaValue]);
 
   return (
     <div className='container'>
@@ -58,7 +62,11 @@ function App() {
           Save as JSON
         </button>
       </div>
-      <textarea rows={6} value={textAreaData} onChange={handleTextAreaChange} />
+      <textarea
+        rows={6}
+        value={textareaValue}
+        onChange={handleTextAreaChange}
+      />
     </div>
   );
 }
