@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, TableHTMLAttributes } from "react";
+import { TableHTMLAttributes } from "react";
 
 export interface TableCellProps extends TableHTMLAttributes<HTMLTableCellElement> {
     value?: string

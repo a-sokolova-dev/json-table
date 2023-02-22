@@ -47,3 +47,32 @@
   line-height: cell-line-height;
   color: $cell-color;
 }
+
+.cell-edit-wrapper {
+  display: flex;
+  align-items: center;
+  
+  input {
+    margin-right: 8px;
+  }
+
+  .btn + .btn {
+    margin-left: 4px;
+  }
+}
+
+.btn {
+  border-radius: 6px;
+  border: 1px solid transparent;
+  padding: $btn-padding;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: $btn-color;
+  background-color: $btn-background-color;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-accent {
+  background-color: $btn-accent-background-color;
+}

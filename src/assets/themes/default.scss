@@ -1,8 +1,12 @@
 $color-base: #353c44 !default;
 $thead-color: #747d86 !default;
 $thead-background-color: #f9f9f9 !default;
+$cell-color: $color-base !default;
+$btn-background-color: #213547 !default;
+$btn-accent-background-color: #61affe !default;
+$btn-color: #ffffff !default;
 $header-cell-height: 48px !default;
 $thead-cell-padding: 8px 20px !default;
 $thead-cell-icon-width: 128px !default;
-$cell-color: $color-base !default;
-$cell-padding: 8px 20px !default;
+$cell-padding: 12px 20px !default;
+$btn-padding: 4px 8px !default;

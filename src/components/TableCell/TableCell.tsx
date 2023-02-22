@@ -21,10 +21,10 @@ export const TableCell: React.FC<TableCellProps> = (props) => {
       {!renderComponent ? (
         <>
           {isEditing ? (
-            <div>
+            <div className="cell-edit-wrapper">
               <input type='text' value={inputValue} onChange={handleChange} />
-              <button onClick={handleSaveValue}>Ok</button>
-              <button onClick={toggleEditMode}>Cancel</button>
+              <button className='btn' onClick={handleSaveValue}>Ok</button>
+              <button className='btn' onClick={toggleEditMode}>Cancel</button>
             </div>
           ) : (
             <div onClick={toggleEditMode}>{value}</div>

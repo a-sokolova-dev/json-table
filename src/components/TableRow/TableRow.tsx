@@ -28,7 +28,7 @@ export const TableRow: React.FC<TableRowProps> = (props) => {
         }}
       />
       <TableCell
-        renderComponent={<button onClick={handleRowDelete}>delete</button>}
+        renderComponent={<button className='btn' onClick={handleRowDelete}>delete</button>}
       />
     </tr>
   );

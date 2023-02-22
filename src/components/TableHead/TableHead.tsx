@@ -12,7 +12,7 @@ export const TableHead: React.FC<TableHeadProps> = (props) => {
           Values
         </th>
         <th className='thead-cell thead-cell-icon thead-cell-height thead-background'>
-          <button onClick={handleAddRow}>Add</button>
+          <button className='btn' onClick={handleAddRow}>Add</button>
         </th>
       </tr>
     </thead>
