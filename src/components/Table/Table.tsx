@@ -48,7 +48,6 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
     );
     setRows(reorderedRows);
     onRowsUpdated && onRowsUpdated(reorderedRows);
-
   };
 
   const reorder = (

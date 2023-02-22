@@ -15,7 +15,7 @@ export const TableRow = forwardRef(
     const handleRowDelete = () => onRowDelete && onRowDelete();
 
     return (
-      <tr ref={ref} {...props}>
+      <tr className='row' ref={ref} {...props}>
         <TableCell
           value={rowRecord.name}
           onValueChange={(name) => {

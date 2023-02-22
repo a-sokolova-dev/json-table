@@ -43,6 +43,7 @@
 }
 
 .cell {
+  width: $cell-width;
   padding: $cell-padding;
   line-height: cell-line-height;
   color: $cell-color;
@@ -51,7 +52,7 @@
 .cell-edit-wrapper {
   display: flex;
   align-items: center;
-  
+
   input {
     margin-right: 8px;
   }
