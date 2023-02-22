@@ -8,6 +8,9 @@
 3. Загрузка и обновление данных из textarea в формате JSON
 4. Выгрузка данных обратно в textarea по нажатию кнопки “Сохранить”
 
+
+Превью: https://a-falkonia.github.io/json-table/
+
 #### Стек
 
 - TypeScript
