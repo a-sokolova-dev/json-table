@@ -2,23 +2,34 @@ import { useState } from "react";
 import { TableHead, TableRow } from "../";
 import { TableRowSchema } from "../TableRow/TableRow.types";
 import { TableProps } from "./Table.types";
+import { nanoid } from "nanoid";
 
 export const Table: React.FC<TableProps> = (props) => {
-  const { data } = props;
+  const { data, onRowsUpdated } = props;
+
   const [rows, setRows] = useState<TableRowSchema[]>(data);
 
   const handleAddRow = () => {
-    setRows([
-      ...rows,
-      {
-        name: "new name",
-        value: "new value",
-      },
-    ]);
+    const newRow: TableRowSchema = {
+      name: "new name",
+      value: "new value",
+      id: nanoid(),
+    };
+
+    setRows([...rows, newRow]);
+    onRowsUpdated && onRowsUpdated([...rows, newRow]);
   };
 
   const handleDeleteRow = (index: number) => {
-    setRows(rows.filter((_, i) => i !== index));
+    const updatedRows = rows.filter((_, i) => i !== index);
+    setRows(updatedRows);
+    onRowsUpdated && onRowsUpdated(updatedRows);
+  };
+
+  const handleChangeRow = (row: TableRowSchema, index: number) => {
+    const updatedRows = [...rows.map((r, i) => (i === index ? row : r))];
+    setRows(updatedRows);
+    onRowsUpdated && onRowsUpdated(updatedRows);
   };
 
   return (
@@ -27,9 +38,9 @@ export const Table: React.FC<TableProps> = (props) => {
       <tbody>
         {rows.map((r, index) => (
           <TableRow
-            key={index}
+            key={`${r.name}-${r.id}`}
             record={r}
-            onRowRecordChange={() => {}}
+            onRowRecordChange={(row) => handleChangeRow(row, index)}
             onRowDelete={() => handleDeleteRow(index)}
           />
         ))}

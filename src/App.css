@@ -6,6 +6,18 @@
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
   width: 80%;
   margin: 0 auto;
+}
+
+.table-container {
+  min-height: 250px;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: end;
+  padding: 24px 0 36px;
 }

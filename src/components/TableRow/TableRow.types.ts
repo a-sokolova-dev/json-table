@@ -4,6 +4,7 @@ export interface TableRowProps {
     onRowDelete?: () => void
 }
 export interface TableRowSchema {
+    id: string;
     name: string
     value: string
 }

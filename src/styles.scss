@@ -74,5 +74,7 @@
 }
 
 .btn-accent {
+  padding: $btn-accent-padding;
   background-color: $btn-accent-background-color;
+  font-weight: 500;
 }
