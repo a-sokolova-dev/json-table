@@ -1,4 +1,6 @@
-export interface TableRowProps {
+import { TableHTMLAttributes } from "react";
+
+export interface TableRowProps extends TableHTMLAttributes<HTMLTableRowElement> {
     record: TableRowSchema
     onRowRecordChange?: (record: TableRowSchema) => void
     onRowDelete?: () => void

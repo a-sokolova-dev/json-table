@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { TableHead, TableRow } from "../";
 import { TableRowSchema } from "../TableRow/TableRow.types";
 import { TableProps } from "./Table.types";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "react-beautiful-dnd";
 import { nanoid } from "nanoid";
 
 export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
@@ -30,6 +36,31 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
     onRowsUpdated && onRowsUpdated(updatedRows);
   };
 
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const reorderedRows = reorder(
+      rows,
+      result.source.index,
+      result.destination.index
+    );
+    setRows(reorderedRows);
+    onRowsUpdated && onRowsUpdated(reorderedRows);
+
+  };
+
+  const reorder = (
+    list: TableRowSchema[],
+    startIndex: number,
+    endIndex: number
+  ) => {
+    const [removed] = list.splice(startIndex, 1);
+    list.splice(endIndex, 0, removed);
+    return list;
+  };
+
   useEffect(() => {
     setRows(data);
   }, [data]);
@@ -37,16 +68,34 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
   return (
     <table className='table'>
       <TableHead onRowAdd={handleAddRow} />
-      <tbody>
-        {rows.map((r) => (
-          <TableRow
-            key={`${r.name}-${r.id}`}
-            record={r}
-            onRowRecordChange={(row) => handleChangeRow(row)}
-            onRowDelete={() => handleDeleteRow(r.id)}
-          />
-        ))}
-      </tbody>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId='tbody'>
+          {(provided) => (
+            <tbody ref={provided.innerRef} {...provided.droppableProps}>
+              {rows.map((r, index) => (
+                <Draggable
+                  draggableId={`${r.name}-${r.id}`}
+                  key={`${r.name}-${r.id}`}
+                  index={index}
+                >
+                  {(provided) => {
+                    return (
+                      <TableRow
+                        record={r}
+                        onRowRecordChange={(row) => handleChangeRow(row)}
+                        onRowDelete={() => handleDeleteRow(r.id)}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      />
+                    );
+                  }}
+                </Draggable>
+              ))}
+            </tbody>
+          )}
+        </Droppable>
+      </DragDropContext>
     </table>
   );
 };
