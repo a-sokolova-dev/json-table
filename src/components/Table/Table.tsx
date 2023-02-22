@@ -1,13 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TableHead, TableRow } from "../";
 import { TableRowSchema } from "../TableRow/TableRow.types";
 import { TableProps } from "./Table.types";
 import { nanoid } from "nanoid";
 
-export const Table: React.FC<TableProps> = (props) => {
-  const { data, onRowsUpdated } = props;
-
-  const [rows, setRows] = useState<TableRowSchema[]>(data);
+export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
+  const [rows, setRows] = useState<TableRowSchema[]>([]);
 
   const handleAddRow = () => {
     const newRow: TableRowSchema = {
@@ -31,6 +29,10 @@ export const Table: React.FC<TableProps> = (props) => {
     setRows(updatedRows);
     onRowsUpdated && onRowsUpdated(updatedRows);
   };
+
+  useEffect(() => {
+    setRows(data);
+  }, [data]);
 
   return (
     <table className='table'>

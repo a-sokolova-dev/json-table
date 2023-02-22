@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import { Table } from "./components";
 import { TableRowSchema } from "./components/TableRow/TableRow.types";
+import { parseDataFromString } from "./utils/parseJson";
 
 const initialData = [
   {
@@ -18,7 +19,7 @@ const initialData = [
 ];
 
 function App() {
-  const [data, setData] = useState<typeof initialData>(initialData);
+  const [data, setData] = useState<TableRowSchema[]>(initialData);
   const [textAreaData, setTextAreaData] = useState<string>(
     JSON.stringify(initialData, ["name", "value"])
   );
@@ -30,6 +31,16 @@ function App() {
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
     setTextAreaData(text);
+
+    const data = parseDataFromString(text);
+    if (!data) return;
+
+    const tableRecords = data.map((item) => ({
+      ...item,
+      id: nanoid(),
+    }));
+
+    handleDataUpdate(tableRecords);
   };
 
   const handleTableSave = () => {
