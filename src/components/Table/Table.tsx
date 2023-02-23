@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TableHead, TableRow } from "../";
-import { TableRowSchema } from "../TableRow/TableRow.types";
+import { TableRecord } from "../TableRow/TableRow.types";
 import { TableProps } from "./Table.types";
 import {
   DragDropContext,
@@ -10,29 +10,31 @@ import {
 } from "react-beautiful-dnd";
 import { nanoid } from "nanoid";
 
-export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
-  const [rows, setRows] = useState<TableRowSchema[]>([]);
+export const Table: React.FC<TableProps> = ({ rows, onRowsUpdated }) => {
+  const [displayedRows, setDisplayedRows] = useState<TableRecord[]>([]);
 
   const handleAddRow = () => {
-    const newRow: TableRowSchema = {
+    const newRow: TableRecord = {
       name: "new name",
       value: "new value",
       id: nanoid(),
     };
 
-    setRows([...rows, newRow]);
-    onRowsUpdated && onRowsUpdated([...rows, newRow]);
+    setDisplayedRows([...displayedRows, newRow]);
+    onRowsUpdated && onRowsUpdated([...displayedRows, newRow]);
   };
 
   const handleDeleteRow = (id: string) => {
     const updatedRows = rows.filter((r) => r.id !== id);
-    setRows(updatedRows);
+    setDisplayedRows(updatedRows);
     onRowsUpdated && onRowsUpdated(updatedRows);
   };
 
-  const handleChangeRow = (row: TableRowSchema) => {
-    const updatedRows = [...rows.map((r) => (r.id === row.id ? row : r))];
-    setRows(updatedRows);
+  const handleChangeRow = (row: TableRecord) => {
+    const updatedRows = [
+      ...displayedRows.map((r) => (r.id === row.id ? row : r)),
+    ];
+    setDisplayedRows(updatedRows);
     onRowsUpdated && onRowsUpdated(updatedRows);
   };
 
@@ -46,12 +48,12 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
       result.source.index,
       result.destination.index
     );
-    setRows(reorderedRows);
+    setDisplayedRows(reorderedRows);
     onRowsUpdated && onRowsUpdated(reorderedRows);
   };
 
   const reorder = (
-    list: TableRowSchema[],
+    list: TableRecord[],
     startIndex: number,
     endIndex: number
   ) => {
@@ -61,8 +63,8 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
   };
 
   useEffect(() => {
-    setRows(data);
-  }, [data]);
+    setDisplayedRows(rows);
+  }, [rows]);
 
   return (
     <table className='table'>
@@ -71,7 +73,7 @@ export const Table: React.FC<TableProps> = ({ data, onRowsUpdated }) => {
         <Droppable droppableId='tbody'>
           {(provided) => (
             <tbody ref={provided.innerRef} {...provided.droppableProps}>
-              {rows.map((r, index) => (
+              {displayedRows.map((r, index) => (
                 <Draggable
                   draggableId={`${r.name}-${r.id}`}
                   key={`${r.name}-${r.id}`}

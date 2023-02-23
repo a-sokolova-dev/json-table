@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TableCellProps } from "./TableCell.types";
 
 export const TableCell: React.FC<TableCellProps> = (props) => {
-  const { value, onValueChange, renderComponent } = props;
+  const { value, onValueChange, component } = props;
   const [inputValue, setInputValue] = useState<string>(value ?? "");
   const [isEditing, setEditing] = useState<boolean>(false);
 
@@ -18,7 +18,7 @@ export const TableCell: React.FC<TableCellProps> = (props) => {
 
   return (
     <td className='cell'>
-      {!renderComponent ? (
+      {!component ? (
         <>
           {isEditing ? (
             <div className='cell-edit-wrapper'>
@@ -35,7 +35,7 @@ export const TableCell: React.FC<TableCellProps> = (props) => {
           )}
         </>
       ) : (
-        <>{renderComponent}</>
+        <>{component}</>
       )}
     </td>
   );
