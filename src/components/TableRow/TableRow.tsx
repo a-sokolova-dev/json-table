@@ -1,13 +1,13 @@
 import { useState, forwardRef } from "react";
 import { TableCell } from "../TableCell";
-import { TableRowProps, TableRowSchema } from "./TableRow.types";
+import { TableRowProps, TableRecord } from "./TableRow.types";
 
 export const TableRow = forwardRef(
   (props: TableRowProps, ref: React.ForwardedRef<HTMLTableRowElement>) => {
     const { record, onRowRecordChange, onRowDelete } = props;
-    const [rowRecord, setRowRecord] = useState<TableRowSchema>(record);
+    const [rowRecord, setRowRecord] = useState<TableRecord>(record);
 
-    const handleRowUpdate = (field: keyof TableRowSchema, value: string) => {
+    const handleRowUpdate = (field: keyof TableRecord, value: string) => {
       setRowRecord({ ...rowRecord, [field]: value });
       onRowRecordChange && onRowRecordChange({ ...rowRecord, [field]: value });
     };
@@ -29,7 +29,7 @@ export const TableRow = forwardRef(
           }}
         />
         <TableCell
-          renderComponent={
+          component={
             <button className='btn' onClick={handleRowDelete}>
               delete
             </button>

@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Table } from "./components";
-import { TableRowSchema } from "./components/TableRow/TableRow.types";
+import { TableRecord } from "./components/TableRow/TableRow.types";
 import useDebounce from "./hooks/useDebounce";
 import { parseDataFromString } from "./utils/parseJson";
 
@@ -20,14 +20,14 @@ const initialData = [
 ];
 
 function App() {
-  const [data, setData] = useState<TableRowSchema[]>(initialData);
+  const [data, setData] = useState<TableRecord[]>(initialData);
   const [textareaValue, setTextareaValue] = useState<string>(
     JSON.stringify(initialData, ["name", "value"])
   );
 
   const debouncedTextareaValue = useDebounce<string>(textareaValue, 500);
 
-  const handleDataUpdate = (values: TableRowSchema[]) => {
+  const handleDataUpdate = (values: TableRecord[]) => {
     setData(values);
   };
 
@@ -55,7 +55,7 @@ function App() {
     <div className='container'>
       <h1>JSON Table</h1>
       <div className='table-container'>
-        <Table data={data} onRowsUpdated={handleDataUpdate} />
+        <Table rows={data} onRowsUpdated={handleDataUpdate} />
       </div>
       <div className='actions-container'>
         <button className='btn btn-accent' onClick={handleTableSave}>
