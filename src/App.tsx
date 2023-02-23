@@ -14,7 +14,7 @@ const initialData = [
   },
   {
     name: "name2",
-    value: "value2",
+    value: "click to edit!",
     id: nanoid(),
   },
 ];
