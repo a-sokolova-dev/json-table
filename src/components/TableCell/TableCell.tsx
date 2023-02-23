@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TableCellProps } from "./TableCell.types";
 
 export const TableCell: React.FC<TableCellProps> = (props) => {
-  const { value, onValueChange, component } = props;
+  const { value, onValueChange, component, placeholder = "empty" } = props;
   const [inputValue, setInputValue] = useState<string>(value ?? "");
   const [isEditing, setEditing] = useState<boolean>(false);
 
@@ -31,7 +31,12 @@ export const TableCell: React.FC<TableCellProps> = (props) => {
               </button>
             </div>
           ) : (
-            <div onClick={toggleEditMode}>{value}</div>
+            <div
+              onClick={toggleEditMode}
+              className={value ? "" : "text-cursive"}
+            >
+              {value || placeholder}
+            </div>
           )}
         </>
       ) : (

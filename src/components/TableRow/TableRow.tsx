@@ -23,12 +23,14 @@ export const TableRow = forwardRef(
           onValueChange={(name) => {
             handleRowUpdate("name", name);
           }}
+          placeholder='empty name'
         />
         <TableCell
           value={rowRecord.value}
           onValueChange={(value) => {
             handleRowUpdate("value", value);
           }}
+          placeholder='empty value'
         />
         <TableCell
           component={

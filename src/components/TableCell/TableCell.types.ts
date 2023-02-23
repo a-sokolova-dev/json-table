@@ -6,6 +6,10 @@ export interface TableCellProps extends TableHTMLAttributes<HTMLTableCellElement
    */
     value?: string
     /**
+    * The placeholder for the empty cell.
+    */
+    placeholder?: string
+    /**
    * The component rendered inside the <td>.
    */
     component?: React.ReactNode;
