@@ -3,8 +3,10 @@ import { TableCell } from "../TableCell";
 import { TableRowProps, TableRecord } from "./TableRow.types";
 
 export const TableRow = forwardRef(
-  (props: TableRowProps, ref: React.ForwardedRef<HTMLTableRowElement>) => {
-    const { record, onRowRecordChange, onRowDelete } = props;
+  (
+    { record, onRowRecordChange, onRowDelete, ...props }: TableRowProps,
+    ref: React.ForwardedRef<HTMLTableRowElement>
+  ) => {
     const [rowRecord, setRowRecord] = useState<TableRecord>(record);
 
     const handleRowUpdate = (field: keyof TableRecord, value: string) => {

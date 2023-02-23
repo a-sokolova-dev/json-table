@@ -1,7 +1,6 @@
 import { TableHeadProps } from "./TableHead.types";
 
-export const TableHead: React.FC<TableHeadProps> = (props) => {
-  const { onRowAdd } = props;
+export const TableHead: React.FC<TableHeadProps> = ({onRowAdd, ...props}) => {
   const handleAddRow = () => onRowAdd && onRowAdd();
 
   return (
