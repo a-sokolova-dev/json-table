@@ -1,6 +1,8 @@
 # [JSON Table Editor][web-url]
 
 [JSON Table Editor][web-url] is a simple tool to view and edit JSON content in table format.
+
+
 Built with [React], [Sass] and [TypeScript].
 
 [web-url]: https://a-sokolova-dev.github.io/json-table/
