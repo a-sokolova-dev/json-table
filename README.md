@@ -1,50 +1,50 @@
-## JSON Table
+# [JSON Table Editor][web-url]
 
-Примитивный редактор табличных данных
+[JSON Table Editor][web-url] is a simple tool to view and edit JSON content in table format.
+Built with [React], [Sass] and [TypeScript].
 
-Функциональные требования:
-1. Просмотр, добавление, изменение, удаление данных
-2. Изменение порядка записей
-3. Загрузка и обновление данных из textarea в формате JSON
-4. Выгрузка данных обратно в textarea по нажатию кнопки “Сохранить”
+[web-url]: https://a-sokolova-dev.github.io/json-table/
+[React]: https://react.dev/
+[Sass]: https://sass-lang.com/
+[TypeScript]: https://www.typescriptlang.org/
 
+## 🚀 Preview
 
-Превью: https://a-falkonia.github.io/json-table/
+![preview](preview.png)
 
-#### Стек
+> Preview generated with [pika.style](https://pika.style/).
 
-- TypeScript
-- React
-- SCSS (atomic styles)
-- react-beautiful-dnd
+## 🛠️ Technologies
 
-## Getting started
+- [react](https://react.dev/)
+- [sass](https://sass-lang.com/)
+- [typescript](https://www.typescriptlang.org/)
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd)
+- [vite](https://vitejs.dev/)
 
-Clone the repo
+## ✨ Getting Started
 
+### Clone the project using one of these ways:
+
+1. [Fork](https://github.com/a-falkonia/json-table/fork) the repository
+
+2. Clone the repository locally
+
+```bash
+git clone https://github.com/a-falkonia/json-table/
+cd json-table
 ```
-git clone https://github.com/a-falkonia/json-table.git
-```
 
-Install NPM packages
-```
+### Install dependencies
+
+```bash
 npm install
 ```
 
-Run the project in dev mode
-```
+### Run the project
+
+```bash
 npm run dev
 ```
 
-## Available scripts
-`npm run dev`
-
-Runs the app in the development mode.
-Open [http://127.0.0.1:5173/]( http://127.0.0.1:5173/) to view it in your browser.
-
-`npm run build`
-
-Builds the app for production to the `build` folder.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+Open [http://localhost:5173/](http://localhost:5173/) with your browser to see the result.
